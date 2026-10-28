@@ -26,7 +26,7 @@
 
 ## 👥 The Founding Partners
 
-- **Buzdil Mirza** — Co-Founder & Creative Director *(Brand Identity, Interaction Motion & Swiss Grid Design)*
+- **Adil Mirza** — Co-Founder & Creative Director *(Brand Identity, Interaction Motion & Swiss Grid Design)*
 - **Vedant Satbhai** — Co-Founder & Lead Systems Architect *(Next.js App Router, Distributed Backends & DB Engines)*
 - **Prajjwal Tripathi** — Co-Founder & Automation Engineer *(Autonomous LLM Agents, Workflow Orchestration & Pipelines)*
 
