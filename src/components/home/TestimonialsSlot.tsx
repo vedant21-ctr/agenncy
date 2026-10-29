@@ -19,7 +19,7 @@ export default function TestimonialsSlot({ testimonials = [] }: { testimonials?:
       <div className="max-w-7xl mx-auto px-6 sm:px-8 space-y-12">
         <div className="space-y-2">
           <span className="font-mono text-xs text-[#ff5500] uppercase tracking-wider block">
-            // CLIENT FEEDBACK
+            {"// CLIENT FEEDBACK"}
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
             What Founders Say.

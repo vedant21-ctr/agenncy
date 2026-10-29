@@ -1,64 +1,60 @@
 import HomeHero from "@/components/home/HomeHero";
-import ScrollHighlightStatement from "@/components/home/ScrollHighlightStatement";
-import TechMarqueeStrip from "@/components/home/TechMarqueeStrip";
-import ShowcaseCenterpiece from "@/components/home/ShowcaseCenterpiece";
-import PinnedServices from "@/components/home/PinnedServices";
-import QuoteConfigurator from "@/components/ui/QuoteConfigurator";
+import BuildShowcase from "@/components/effects/BuildShowcase";
+import FeaturedWork from "@/components/home/FeaturedWork";
+import ServicesSection from "@/components/home/ServicesSection";
 import ProcessSection from "@/components/home/ProcessSection";
-import TechStackWall from "@/components/home/TechStackWall";
 import WhyUsSection from "@/components/home/WhyUsSection";
 import TeamSection from "@/components/home/TeamSection";
-import PricingSection from "@/components/home/PricingSection";
-import TestimonialsSlot from "@/components/home/TestimonialsSlot";
 import FaqSection from "@/components/home/FaqSection";
 import FinalCta from "@/components/home/FinalCta";
+import SectionBackgrounds from "@/components/effects/SectionBackgrounds";
+import ScrollVelocityMarquee from "@/components/effects/ScrollVelocityMarquee";
+import PersistentCanvas from "@/components/three/PersistentCanvas";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#09090b]">
-      {/* 1. Loud Editorial Hero with Draggable Stickers */}
-      <HomeHero />
+    <main className="min-h-screen relative">
+      {/* 0. Layered Ambient Section Shaders & Deep Gradient */}
+      <SectionBackgrounds />
 
-      {/* 2. Scroll Velocity Marquee Strip */}
-      <TechMarqueeStrip />
+      {/* 0. Persistent Fixed 3D Scene Behind Content */}
+      <PersistentCanvas />
 
-      {/* 3. Progressive Scroll-Scrubbed Statement */}
-      <ScrollHighlightStatement />
+      {/* Foreground Content Layer: Elevated so text is 100% readable over 3D background */}
+      <div className="relative z-10">
+        {/* 1. Hero */}
+        <HomeHero />
 
-      {/* 4. Showcase Centerpiece (Giant Typography List with Floating Preview + Grid) */}
-      <ShowcaseCenterpiece />
+        {/* Marquee Strip */}
+        <ScrollVelocityMarquee />
 
-      {/* 5. Pinned Services 01-05 Swapper */}
-      <PinnedServices />
+        {/* 2. What we can build */}
+        <BuildShowcase />
 
-      {/* 6. Interactive Scope & Ballpark Quote Configurator */}
-      <section className="py-24 sm:py-32 max-w-7xl mx-auto px-6 sm:px-8 border-b-2 border-white/10">
-        <QuoteConfigurator />
-      </section>
+        {/* 3. Featured work gallery */}
+        <FeaturedWork />
 
-      {/* 7. Process Timeline with SVG Scroll-Driven Drawing Line */}
-      <ProcessSection />
+        {/* Marquee Strip */}
+        <ScrollVelocityMarquee />
 
-      {/* 8. Interactive Tech Stack Wall */}
-      <TechStackWall />
+        {/* 4. Services */}
+        <ServicesSection />
 
-      {/* 9. Foundational Studio Values */}
-      <WhyUsSection />
+        {/* 5. How we work */}
+        <ProcessSection />
 
-      {/* 10. Founding Partners (Buzdil, Vedant, Prajjwal) with 3D Tilt & Fun Fact */}
-      <TeamSection />
+        {/* 6. Why GrowHaus */}
+        <WhyUsSection />
 
-      {/* 11. Transparent Confirmed "From" Pricing */}
-      <PricingSection />
+        {/* 7. Team */}
+        <TeamSection />
 
-      {/* 12. Verified Reviews Slot */}
-      <TestimonialsSlot />
+        {/* 8. FAQ */}
+        <FaqSection />
 
-      {/* 13. Frequently Asked Questions */}
-      <FaqSection />
-
-      {/* 14. Magnetic Final CTA */}
-      <FinalCta />
+        {/* 10. Final CTA */}
+        <FinalCta />
+      </div>
     </main>
   );
 }

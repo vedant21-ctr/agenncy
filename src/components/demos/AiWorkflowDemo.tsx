@@ -29,7 +29,7 @@ export default function AiWorkflowDemo() {
       icon: Webhook,
       status: activeStep > 0 ? "complete" : activeStep === 0 ? "running" : "idle",
       color: "#00E5FF",
-      detail: "Payload received: { email: 'founder@acme.ai', mrr: '$120k' }",
+      detail: "Payload received: { email: 'founder@startup.in', mrr: '₹12L/mo' }",
     },
     {
       id: "llm",

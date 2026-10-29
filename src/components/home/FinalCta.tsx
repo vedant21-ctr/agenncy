@@ -1,57 +1,48 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, Calendar } from "lucide-react";
-import { SITE_CONFIG } from "@/config/site";
-import Magnetic from "@/components/animation/Magnetic";
+import { ArrowUpRight } from "lucide-react";
 import Reveal from "@/components/animation/Reveal";
+import AuroraShader from "@/components/effects/AuroraShader";
 
 export default function FinalCta() {
   return (
-    <section className="py-24 sm:py-32 bg-[#09090b] text-white border-t border-white/[0.08]">
-      <div className="max-w-5xl mx-auto px-6 sm:px-8 text-center space-y-8">
+    <section className="relative py-28 sm:py-36 bg-transparent text-white border-t border-white/[0.08] overflow-hidden">
+      {/* Subtle Aurora Shader Accent in Growth Green */}
+      <AuroraShader opacity={0.35} />
+
+      <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-8 text-center space-y-6">
         <Reveal>
           <div className="space-y-4">
-            <span className="font-mono text-xs text-[#ff5500] uppercase tracking-wider block">
-              // READY TO SHIP?
+            <span className="font-mono text-xs text-[#3ddc84] uppercase tracking-wider block font-semibold">
+              {"// START GROWING"}
             </span>
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
-              Start building your product this quarter.
+            {/* Headline: max 8 words */}
+            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+              Let&apos;s build software that helps your business grow.
             </h2>
-            <p className="text-base sm:text-lg text-zinc-400 max-w-xl mx-auto leading-relaxed font-normal">
-              Tell us about your project vision. We will review your technical constraints and deliver an architecture outline, fixed price, and timeline within 24 hours.
+            {/* Body copy: max 2 short sentences */}
+            <p className="text-base sm:text-lg text-zinc-400 max-w-xl mx-auto leading-relaxed">
+              Tell us about your project vision. We will review your goals and reply with a fixed quote and timeline in 24 hours.
             </p>
           </div>
         </Reveal>
 
-        <Reveal delay={0.15}>
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-            <Magnetic strength={0.3}>
-              <Link
-                href="/contact"
-                className="group/btn flex items-center gap-2 rounded-full bg-[#ff5500] px-8 py-4 text-xs font-mono font-bold text-white uppercase tracking-wider hover:bg-[#e04b00] active:scale-95 transition-all shadow-xl shadow-[#ff5500]/20"
-              >
-                <span>Start a project</span>
-                <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-              </Link>
-            </Magnetic>
-
-            {SITE_CONFIG.contact.showCalendly && SITE_CONFIG.contact.calendlyUrl && (
-              <a
-                href={SITE_CONFIG.contact.calendlyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-full border border-white/15 bg-[#121216] px-6 py-4 text-xs font-mono text-zinc-300 hover:text-white hover:border-white/30 transition-all"
-              >
-                <Calendar className="w-4 h-4 text-[#ff5500]" />
-                <span>Book 20-min intro call</span>
-              </a>
-            )}
+        <Reveal delay={0.1}>
+          <div className="pt-2">
+            <Link
+              href="/contact"
+              prefetch={true}
+              className="inline-flex items-center gap-2 rounded-xl bg-[#3ddc84] px-8 py-4 text-xs font-mono font-bold text-black uppercase tracking-wider hover:bg-[#34c776] transition-all shadow-xl shadow-[#3ddc84]/15"
+            >
+              <span>Start a project</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
           </div>
         </Reveal>
 
-        <div className="text-xs font-mono text-zinc-500 pt-6">
-          Direct founder reply within 24 hours • Fixed-price quotes • No obligations
+        <div className="text-xs font-mono text-zinc-500 pt-4">
+          Direct founder reply within 24 hours • Transparent fixed-price quotes
         </div>
       </div>
     </section>

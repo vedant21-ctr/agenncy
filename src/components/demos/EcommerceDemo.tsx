@@ -116,8 +116,8 @@ export default function EcommerceDemo() {
           </div>
 
           <div className="flex items-baseline gap-3">
-            <span className="text-2xl font-mono font-bold text-[#CCFF00]">$480</span>
-            <span className="text-white/30 line-through text-xs">$550</span>
+            <span className="text-2xl font-mono font-bold text-[#CCFF00]">₹39,999</span>
+            <span className="text-white/30 line-through text-xs">₹45,000</span>
             <span className="rounded bg-[#CCFF00]/10 text-[#CCFF00] px-2 py-0.5 text-[10px] font-mono">
               PRE-ORDER TIER 1
             </span>
@@ -163,7 +163,7 @@ export default function EcommerceDemo() {
               ) : (
                 <>
                   <ShoppingBag className="w-4 h-4" />
-                  <span>Add To Bag • $480</span>
+                  <span>Add To Bag • ₹39,999</span>
                 </>
               )}
             </button>
@@ -175,7 +175,7 @@ export default function EcommerceDemo() {
               <span>3-Year Warranty</span>
             </div>
             <span>•</span>
-            <span>Worldwide Carbon-Neutral Shipping</span>
+            <span>All-India Express Delivery</span>
           </div>
         </div>
       </div>
@@ -220,7 +220,7 @@ export default function EcommerceDemo() {
                       <div className="font-bold text-white text-[11px]">Aura Resonator One</div>
                       <div className="text-[10px] text-white/40 font-mono">{selectedColor.name}</div>
                     </div>
-                    <div className="font-mono font-bold text-[#CCFF00]">$480</div>
+                    <div className="font-mono font-bold text-[#CCFF00]">₹39,999</div>
                   </div>
                 </div>
               )}
@@ -230,10 +230,10 @@ export default function EcommerceDemo() {
               <div className="pt-4 border-t border-white/10 space-y-3">
                 <div className="flex justify-between text-white font-mono text-xs">
                   <span>Subtotal:</span>
-                  <span className="text-[#CCFF00] font-bold">${cartCount * 480}</span>
+                  <span className="text-[#CCFF00] font-bold">₹{(cartCount * 39999).toLocaleString("en-IN")}</span>
                 </div>
                 <button
-                  onClick={() => alert("Concept Checkout Triggered — Built by Kinetic Labs")}
+                  onClick={() => alert("Concept Checkout Triggered — Built by GrowHaus")}
                   className="w-full rounded bg-white text-black font-bold py-2.5 text-[11px] uppercase tracking-wider hover:bg-[#CCFF00] transition-colors"
                 >
                   Checkout (Demo)

@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site";
 import Reveal from "@/components/animation/Reveal";
-import ClipReveal from "@/components/animation/ClipReveal";
 import DemoRenderer from "@/components/demos/DemoRenderer";
 
 export async function generateStaticParams() {
@@ -55,7 +55,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
           <div className="flex items-center gap-2">
             {project.isConcept && (
-              <span className="rounded bg-black/60 border border-white/10 px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider text-white/80">
+              <span className="rounded bg-black/60 border border-white/10 px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider text-[#3ddc84]">
                 Concept Project
               </span>
             )}
@@ -64,45 +64,45 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </div>
 
         {/* Hero Title & Outcome */}
-        <div className="space-y-6 max-w-4xl">
-          <span className="font-mono text-xs text-[#ff5500] uppercase tracking-wider block">
-            // {project.type} CASE STUDY
+        <div className="space-y-4 max-w-4xl">
+          <span className="font-mono text-xs text-[#3ddc84] uppercase tracking-wider block font-semibold">
+            {"//"} {project.type} CASE STUDY
           </span>
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
+          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
             {project.title}
           </h1>
-          <p className="text-lg sm:text-2xl text-zinc-300 leading-relaxed font-normal">
+          <p className="text-base sm:text-xl text-zinc-300 leading-relaxed">
             {project.outcome}
           </p>
         </div>
 
         {/* 2-Column Layout: Sticky Side Info + Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-6">
-          {/* Sticky Side Metadata Column with reading progress indicator */}
-          <aside className="lg:col-span-4 lg:sticky lg:top-28 space-y-6 rounded-2xl bg-[#121216] border border-white/[0.08] p-6 sm:p-7">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-4">
+          {/* Sticky Side Metadata Column */}
+          <aside className="lg:col-span-4 lg:sticky lg:top-28 space-y-6 rounded-2xl bg-[#111115] border border-white/10 p-6 sm:p-7">
             <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
-              <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest block">
+              <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest block font-semibold">
                 PROJECT METADATA
               </span>
-              <span className="w-2 h-2 rounded-full bg-[#ff5500]" />
+              <span className="w-2 h-2 rounded-full bg-[#3ddc84]" />
             </div>
 
             <div className="space-y-4 text-xs font-mono">
               <div>
-                <span className="text-zinc-500 block text-[10px] uppercase">CLIENT / STATUS</span>
-                <span className="text-white font-bold">{project.client}</span>
+                <span className="text-zinc-500 block text-[10px] uppercase">STATUS</span>
+                <span className="text-white font-semibold">Concept Build ({project.client})</span>
               </div>
               <div>
-                <span className="text-zinc-500 block text-[10px] uppercase">OUR ROLE</span>
-                <span className="text-white font-bold">{project.role}</span>
+                <span className="text-zinc-500 block text-[10px] uppercase">ROLE</span>
+                <span className="text-white font-semibold">{project.role}</span>
               </div>
               <div>
                 <span className="text-zinc-500 block text-[10px] uppercase">TIMELINE</span>
-                <span className="text-white font-bold">{project.duration}</span>
+                <span className="text-white font-semibold">{project.duration}</span>
               </div>
               <div>
                 <span className="text-zinc-500 block text-[10px] uppercase">YEAR</span>
-                <span className="text-white font-bold">{project.year}</span>
+                <span className="text-white font-semibold">{project.year}</span>
               </div>
             </div>
 
@@ -122,77 +122,77 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
             <div className="pt-4 border-t border-white/[0.06]">
               <Link
-                href="/contact"
-                className="w-full flex items-center justify-center gap-2 rounded-xl bg-[#ff5500] py-3 text-xs font-mono font-bold text-white uppercase tracking-wider hover:bg-[#e04b00] transition-colors"
+                href={`/contact?type=${encodeURIComponent(project.title)}`}
+                className="w-full flex items-center justify-center gap-2 rounded-xl bg-[#3ddc84] py-3 text-xs font-mono font-bold text-black uppercase tracking-wider hover:bg-[#34c776] transition-colors"
               >
-                <span>Discuss a similar build</span>
+                <span>Request a quote like this</span>
                 <ArrowUpRight className="w-4 h-4" />
               </Link>
             </div>
           </aside>
 
           {/* Main Content Column */}
-          <div className="lg:col-span-8 space-y-16">
-            {/* Primary Visual Hero Mockup with ClipReveal */}
-            <ClipReveal>
-              <div className="rounded-2xl bg-[#121216] border border-white/[0.08] overflow-hidden shadow-2xl">
-                {/* Browser bar frame */}
-                <div className="flex items-center gap-2 px-4 py-3 bg-[#18181f] border-b border-white/[0.06]">
-                  <div className="flex gap-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-                  </div>
-                  <div className="mx-auto rounded bg-black/40 px-3 py-1 font-mono text-[10px] text-zinc-400 border border-white/5">
-                    https://{project.slug}.preview.internal
-                  </div>
+          <div className="lg:col-span-8 space-y-14">
+            {/* Primary Visual Hero Mockup */}
+            <div className="rounded-2xl bg-[#111115] border border-white/10 overflow-hidden shadow-2xl">
+              <div className="flex items-center gap-2 px-4 py-3 bg-[#16161c] border-b border-white/[0.06]">
+                <div className="flex gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
                 </div>
+                <div className="mx-auto rounded bg-black/40 px-3 py-1 font-mono text-[10px] text-zinc-400 border border-white/5">
+                  https://{project.slug}.growhaus.agency
+                </div>
+              </div>
 
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+              <div className="relative aspect-[16/10] w-full bg-zinc-950">
+                <Image
                   src={project.heroImage}
                   alt={project.title}
-                  className="w-full h-auto object-cover"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 66vw"
+                  className="object-cover"
                 />
               </div>
-            </ClipReveal>
+            </div>
 
             {/* Overview & Summary */}
             <Reveal>
-              <div className="space-y-4">
-                <span className="font-mono text-xs text-[#ff5500] uppercase tracking-wider block">
-                  // EXECUTIVE SUMMARY
+              <div className="space-y-3">
+                <span className="font-mono text-xs text-[#3ddc84] uppercase tracking-wider block font-semibold">
+                  {"// SUMMARY"}
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
                   Project Overview
                 </h2>
-                <p className="text-base text-zinc-300 leading-relaxed font-normal">
+                <p className="text-base text-zinc-300 leading-relaxed">
                   {project.summary}
                 </p>
               </div>
             </Reveal>
 
             {/* Challenge & Approach */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
               <Reveal>
-                <div className="rounded-2xl bg-[#121216] border border-white/[0.08] p-7 space-y-3 h-full">
-                  <span className="font-mono text-xs text-red-400 uppercase tracking-wider block">
+                <div className="rounded-2xl bg-[#111115] border border-white/10 p-6 sm:p-7 space-y-2 h-full">
+                  <span className="font-mono text-xs text-red-400 uppercase tracking-wider block font-semibold">
                     THE CHALLENGE
                   </span>
                   <h3 className="text-lg font-bold text-white">Problem Statement</h3>
-                  <p className="text-sm text-zinc-400 leading-relaxed font-normal">
+                  <p className="text-sm text-zinc-400 leading-relaxed">
                     {project.challenge}
                   </p>
                 </div>
               </Reveal>
 
               <Reveal delay={0.1}>
-                <div className="rounded-2xl bg-[#121216] border border-white/[0.08] p-7 space-y-3 h-full">
-                  <span className="font-mono text-xs text-[#ff5500] uppercase tracking-wider block">
+                <div className="rounded-2xl bg-[#111115] border border-white/10 p-6 sm:p-7 space-y-2 h-full">
+                  <span className="font-mono text-xs text-[#3ddc84] uppercase tracking-wider block font-semibold">
                     OUR APPROACH
                   </span>
                   <h3 className="text-lg font-bold text-white">Methodology</h3>
-                  <p className="text-sm text-zinc-400 leading-relaxed font-normal">
+                  <p className="text-sm text-zinc-400 leading-relaxed">
                     {project.approach}
                   </p>
                 </div>
@@ -205,11 +205,11 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 <div className="space-y-4 pt-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <span className="font-mono text-xs text-[#ff5500] uppercase tracking-wider block">
-                        // INTERACTIVE PROTOTYPE
+                      <span className="font-mono text-xs text-[#3ddc84] uppercase tracking-wider block font-semibold">
+                        {"// INTERACTIVE DEMO"}
                       </span>
                       <h2 className="text-2xl font-bold tracking-tight text-white mt-0.5">
-                        Working Interface Demonstration
+                        Interactive Feature Prototype
                       </h2>
                     </div>
                     <span className="font-mono text-xs text-zinc-500">Live in browser</span>
@@ -224,14 +224,14 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
             {/* Key Engineering Features */}
             <Reveal>
-              <div className="rounded-2xl bg-[#121216] border border-white/[0.08] p-8 space-y-5">
-                <span className="font-mono text-xs text-zinc-400 uppercase tracking-wider block">
-                  KEY DELIVERED CAPABILITIES
+              <div className="rounded-2xl bg-[#111115] border border-white/10 p-7 sm:p-8 space-y-4">
+                <span className="font-mono text-xs text-zinc-400 uppercase tracking-wider block font-semibold">
+                  KEY FEATURES WE ENGINEERED
                 </span>
                 <ul className="space-y-3">
                   {project.keyFeatures.map((feat, idx) => (
                     <li key={idx} className="flex items-start gap-3 text-sm text-zinc-200">
-                      <CheckCircle2 className="w-4 h-4 text-[#ff5500] shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-[#3ddc84] shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </li>
                   ))}
@@ -239,19 +239,19 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               </div>
             </Reveal>
 
-            {/* Results / Target Metrics (Honest Design Targets) */}
+            {/* Metrics */}
             <Reveal>
-              <div className="space-y-6">
-                <span className="font-mono text-xs text-[#ff5500] uppercase tracking-wider block">
-                  // DESIGN TARGETS & DEMO BEHAVIOR
+              <div className="space-y-4">
+                <span className="font-mono text-xs text-[#3ddc84] uppercase tracking-wider block font-semibold">
+                  {"// PERFORMANCE & STANDARDS"}
                 </span>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {project.metrics.map((m, i) => (
-                    <div key={i} className="rounded-xl bg-[#121216] border border-white/[0.08] p-5 space-y-1">
-                      <div className="text-2xl sm:text-3xl font-extrabold font-mono text-white">
+                    <div key={i} className="rounded-xl bg-[#111115] border border-white/10 p-5 space-y-1">
+                      <div className="text-2xl font-bold font-mono text-white">
                         {m.value}
                       </div>
-                      <div className="text-xs font-bold text-zinc-300">{m.label}</div>
+                      <div className="text-xs font-semibold text-zinc-300">{m.label}</div>
                       <div className="text-[11px] font-mono text-zinc-500">{m.note}</div>
                     </div>
                   ))}
@@ -261,24 +261,24 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </div>
         </div>
 
-        {/* Case Study "Next Project" Screen-Filling Hero Section */}
-        <div className="pt-24 border-t border-white/[0.08]">
+        {/* Up Next Project Section */}
+        <div className="pt-16 border-t border-white/[0.08]">
           <Link
             href={`/work/${nextProject.slug}`}
-            className="group block rounded-3xl bg-[#121216] border border-white/[0.08] hover:border-[#ff5500]/50 p-8 sm:p-16 transition-all duration-300 relative overflow-hidden"
+            className="group block rounded-2xl bg-[#111115] border border-white/10 hover:border-[#3ddc84]/50 p-8 sm:p-12 transition-all duration-300"
           >
-            <div className="space-y-4">
-              <span className="font-mono text-xs text-zinc-500 uppercase tracking-widest block">
+            <div className="space-y-3">
+              <span className="font-mono text-xs text-zinc-500 uppercase tracking-widest block font-semibold">
                 UP NEXT // {nextProject.type}
               </span>
-              <h2 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white group-hover:text-[#ff5500] transition-colors leading-tight">
+              <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white group-hover:text-[#3ddc84] transition-colors">
                 {nextProject.title}
               </h2>
-              <p className="text-sm sm:text-base text-zinc-400 max-w-xl font-normal">
+              <p className="text-sm text-zinc-400 max-w-xl">
                 {nextProject.outcome}
               </p>
-              <div className="pt-4 flex items-center gap-2 text-xs font-mono font-bold text-white group-hover:text-[#ff5500] transition-colors">
-                <span>Explore next case study</span>
+              <div className="pt-2 flex items-center gap-2 text-xs font-mono font-bold text-white group-hover:text-[#3ddc84] transition-colors">
+                <span>View next case study</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
               </div>
             </div>
