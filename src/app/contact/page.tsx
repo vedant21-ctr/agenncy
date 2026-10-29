@@ -56,7 +56,7 @@ function ContactFormInner() {
     return () => clearTimeout(timer);
   }, [searchParams]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg("");
 
@@ -73,11 +73,40 @@ function ContactFormInner() {
       return;
     }
 
+    const formEndpoint = process.env.NEXT_PUBLIC_FORM_ENDPOINT;
+    if (!formEndpoint || formEndpoint.trim() === "") {
+      setErrorMsg(`Form service is not configured. Please email us directly at ${SITE_CONFIG.contact.email}.`);
+      return;
+    }
+
     setIsSubmitting(true);
-    setTimeout(() => {
+    try {
+      const res = await fetch(formEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          serviceNeed: selectedNeed,
+          message: message.trim(),
+        }),
+      });
+
+      if (res.ok) {
+        setIsSubmitted(true);
+      } else {
+        const data = await res.json().catch(() => null);
+        const errMsg = data?.error || data?.message || "Failed to send message";
+        setErrorMsg(`Unable to send message (${errMsg}). Please email us directly at ${SITE_CONFIG.contact.email}.`);
+      }
+    } catch {
+      setErrorMsg(`Network error. Please email us directly at ${SITE_CONFIG.contact.email}.`);
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 600);
+    }
   };
 
   return (
