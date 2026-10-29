@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import React from "react";
 
 interface MagneticProps {
   children: React.ReactNode;
@@ -9,37 +8,12 @@ interface MagneticProps {
   className?: string;
 }
 
+/**
+ * Clean wrapper component with normal hover states (no pointer tracking / magnetic cursor physics).
+ */
 export default function Magnetic({
   children,
-  strength = 0.28,
   className = "",
 }: MagneticProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const { clientX, clientY } = e;
-    const { left, top, width, height } = ref.current.getBoundingClientRect();
-    const middleX = clientX - (left + width / 2);
-    const middleY = clientY - (top + height / 2);
-    setPosition({ x: middleX * strength, y: middleY * strength });
-  };
-
-  const handleMouseLeave = () => {
-    setPosition({ x: 0, y: 0 });
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      className={`inline-block ${className}`}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      animate={{ x: position.x, y: position.y }}
-      transition={{ type: "spring", stiffness: 250, damping: 20, mass: 0.1 }}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={`inline-block ${className}`}>{children}</div>;
 }

@@ -7,14 +7,17 @@ export default function ThemeToggle() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
 
   useEffect(() => {
-    const saved = localStorage.getItem("kinetic_theme") as "dark" | "light" | null;
-    if (saved === "light") {
-      setTheme("light");
-      document.documentElement.classList.add("theme-light");
-    } else {
-      setTheme("dark");
-      document.documentElement.classList.remove("theme-light");
-    }
+    const timer = setTimeout(() => {
+      const saved = localStorage.getItem("growhaus_theme") as "dark" | "light" | null;
+      if (saved === "light") {
+        setTheme("light");
+        document.documentElement.classList.add("theme-light");
+      } else {
+        setTheme("dark");
+        document.documentElement.classList.remove("theme-light");
+      }
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -22,7 +25,7 @@ export default function ThemeToggle() {
 
     const updateDOM = () => {
       setTheme(newTheme);
-      localStorage.setItem("kinetic_theme", newTheme);
+      localStorage.setItem("growhaus_theme", newTheme);
       if (newTheme === "light") {
         document.documentElement.classList.add("theme-light");
       } else {
@@ -31,9 +34,13 @@ export default function ThemeToggle() {
     };
 
     // Circular View Transition if supported
+    const docWithTransition = document as unknown as {
+      startViewTransition?: (callback: () => void) => { ready?: Promise<void> };
+    };
+
     if (
       typeof document !== "undefined" &&
-      "startViewTransition" in document &&
+      docWithTransition.startViewTransition &&
       !window.matchMedia("(prefers-reduced-motion: reduce)").matches
     ) {
       const x = e.clientX;
@@ -43,11 +50,11 @@ export default function ThemeToggle() {
         Math.max(y, window.innerHeight - y)
       );
 
-      const transition = (document as any).startViewTransition(() => {
+      const transition = docWithTransition.startViewTransition(() => {
         updateDOM();
       });
 
-      transition.ready.then(() => {
+      transition?.ready?.then(() => {
         document.documentElement.animate(
           {
             clipPath: [
@@ -56,7 +63,7 @@ export default function ThemeToggle() {
             ],
           },
           {
-            duration: 500,
+            duration: 400,
             easing: "cubic-bezier(0.16, 1, 0.3, 1)",
             pseudoElement: "::view-transition-new(root)",
           }
@@ -71,15 +78,11 @@ export default function ThemeToggle() {
     <button
       onClick={toggleTheme}
       type="button"
-      data-cursor="Toggle"
-      aria-label={`Switch to ${theme === "dark" ? "editorial light" : "dark ink"} mode`}
-      className="relative flex items-center justify-center w-9 h-9 rounded-full border border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/40 transition-colors"
+      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+      className="relative w-9 h-9 rounded-xl border border-white/10 bg-[#111115] flex items-center justify-center text-zinc-300 hover:text-white hover:border-white/20 transition-all cursor-pointer"
     >
-      {theme === "dark" ? (
-        <Sun className="w-4 h-4 text-amber-400" />
-      ) : (
-        <Moon className="w-4 h-4 text-zinc-900" />
-      )}
+      <Sun className={`w-4 h-4 transition-transform ${theme === "light" ? "scale-100 rotate-0 text-amber-500" : "scale-0 -rotate-90 hidden"}`} />
+      <Moon className={`w-4 h-4 transition-transform ${theme === "dark" ? "scale-100 rotate-0 text-zinc-300" : "scale-0 rotate-90 hidden"}`} />
     </button>
   );
 }

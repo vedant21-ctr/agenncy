@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SITE_CONFIG } from "@/config/site";
 import ProjectCard from "@/components/home/ProjectCard";
 
-const types = ["All Types", "Website", "Web App", "Automation"] as const;
+const types = ["All Types", "Website", "Web App", "Automation", "Branding"] as const;
 const industries = ["All Industries", "SaaS & Cloud", "E-Commerce", "Fintech", "Developer Tools", "AI & Workflow"] as const;
 
 export default function WorkPage() {
@@ -21,16 +21,16 @@ export default function WorkPage() {
   return (
     <main className="min-h-screen pt-36 pb-24 bg-[#09090b] text-white">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 space-y-12">
-        {/* Page Header */}
-        <div className="max-w-3xl space-y-4">
-          <span className="font-mono text-xs text-[#ff5500] uppercase tracking-wider block">
-            // SELECTED PROJECTS
+        {/* Page Header: Headline max 8 words, body max 2 short sentences */}
+        <div className="max-w-3xl space-y-3">
+          <span className="font-mono text-xs text-[#3ddc84] uppercase tracking-wider block font-semibold">
+            {"// SELECTED WORK"}
           </span>
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white">
-            Our Work.
+          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
+            Our Work and Concept Projects.
           </h1>
-          <p className="text-base sm:text-lg text-zinc-400 leading-relaxed font-normal">
-            A portfolio of production web applications, digital flagships, and autonomous pipelines. Each project represents our commitment to fast performance, clean code, and purposeful craft.
+          <p className="text-base text-zinc-400 leading-relaxed">
+            A portfolio of production web applications and custom websites. Each project represents our commitment to fast performance and clean code.
           </p>
         </div>
 
@@ -43,10 +43,10 @@ export default function WorkPage() {
               <button
                 key={t}
                 onClick={() => setSelectedType(t)}
-                className={`px-3.5 py-1.5 rounded-full font-mono text-xs transition-all ${
+                className={`px-3.5 py-1.5 rounded-full font-mono text-xs transition-all cursor-pointer ${
                   selectedType === t
-                    ? "bg-[#ff5500] text-white font-bold"
-                    : "bg-[#121216] border border-white/[0.08] text-zinc-400 hover:text-white hover:border-white/20"
+                    ? "bg-[#3ddc84] text-black font-bold"
+                    : "bg-[#111115] border border-white/10 text-zinc-400 hover:text-white hover:border-white/20"
                 }`}
               >
                 {t}
@@ -61,7 +61,7 @@ export default function WorkPage() {
               <button
                 key={ind}
                 onClick={() => setSelectedIndustry(ind)}
-                className={`px-3 py-1 rounded-full font-mono text-xs transition-all ${
+                className={`px-3 py-1 rounded-full font-mono text-xs transition-all cursor-pointer ${
                   selectedIndustry === ind
                     ? "bg-white/20 text-white font-bold"
                     : "bg-transparent text-zinc-500 hover:text-zinc-300"
@@ -73,7 +73,7 @@ export default function WorkPage() {
           </div>
         </div>
 
-        {/* Work Grid with Framer Motion layout animation */}
+        {/* Work Grid with smooth layout rearrangement */}
         {filteredProjects.length === 0 ? (
           <div className="py-20 text-center text-zinc-500 font-mono text-sm">
             No projects found matching the selected filters.
@@ -85,10 +85,10 @@ export default function WorkPage() {
                 <motion.div
                   layout
                   key={project.id}
-                  initial={{ opacity: 0, scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <ProjectCard project={project} />
                 </motion.div>

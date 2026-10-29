@@ -9,10 +9,10 @@ export default function FintechAppDemo() {
   const [selectedPeriod, setSelectedPeriod] = useState<"W" | "M" | "Y">("M");
 
   const transactions = [
-    { title: "Supabase Compute", category: "Cloud Infrastructure", amount: "-$142.00", time: "Today 14:20", icon: ArrowUpRight, color: "#CCFF00" },
-    { title: "Client Wire (Stripe)", category: "Project Milestone", amount: "+$12,500.00", time: "Yesterday", icon: ArrowDownLeft, color: "#34D399" },
-    { title: "Linear Software", category: "Subscription", amount: "-$35.00", time: "Oct 24", icon: ArrowUpRight, color: "#CCFF00" },
-    { title: "OpenAI API Usage", category: "AI Workflows", amount: "-$280.40", time: "Oct 22", icon: ArrowUpRight, color: "#CCFF00" },
+    { title: "Supabase Compute", category: "Cloud Infrastructure", amount: "-₹11,500", time: "Today 14:20", icon: ArrowUpRight, color: "#CCFF00" },
+    { title: "Client Payout (Razorpay)", category: "Project Milestone", amount: "+₹10,25,000", time: "Yesterday", icon: ArrowDownLeft, color: "#34D399" },
+    { title: "Linear Software", category: "Subscription", amount: "-₹2,900", time: "Oct 24", icon: ArrowUpRight, color: "#CCFF00" },
+    { title: "OpenAI API Usage", category: "AI Workflows", amount: "-₹23,000", time: "Oct 22", icon: ArrowUpRight, color: "#CCFF00" },
   ];
 
   return (
@@ -47,7 +47,7 @@ export default function FintechAppDemo() {
           <div className="pt-1">
             <span className="text-[10px] text-white/40 font-mono uppercase tracking-wider">Total Liquid Portfolio</span>
             <div className="flex items-baseline gap-2 mt-0.5">
-              <span className="text-2xl font-bold font-mono tracking-tight">$342,890.40</span>
+              <span className="text-2xl font-bold font-mono tracking-tight">₹34,28,900</span>
               <span className="text-[10px] text-[#34D399] font-mono flex items-center">
                 <TrendingUp className="w-3 h-3 mr-0.5" /> +14.2%
               </span>

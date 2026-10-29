@@ -20,7 +20,7 @@ export default function TextScramble({
   as: Component = "span",
 }: TextScrambleProps) {
   const [displayText, setDisplayText] = useState(text);
-  const containerRef = useRef<HTMLSpanElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const inView = useInView(containerRef, { once: true, margin: "-10% 0px" });
   const reducedMotion = useReducedMotion();
   const hasAnimated = useRef(false);
@@ -61,7 +61,7 @@ export default function TextScramble({
   }, [inView, text, speed, reducedMotion]);
 
   return (
-    <Component ref={containerRef as any} className={`font-mono ${className}`}>
+    <Component ref={containerRef} className={`font-mono ${className}`}>
       {displayText}
     </Component>
   );

@@ -10,10 +10,11 @@ interface SectionDot {
 
 const sections: SectionDot[] = [
   { id: "hero", label: "Intro" },
-  { id: "statement", label: "Philosophy" },
-  { id: "selected-work", label: "Work" },
+  { id: "build", label: "Capabilities" },
+  { id: "featured-work", label: "Work" },
   { id: "services", label: "Services" },
   { id: "process", label: "Process" },
+  { id: "why-us", label: "Why Us" },
   { id: "team", label: "Team" },
   { id: "pricing", label: "Packages" },
   { id: "faq", label: "FAQ" },
@@ -54,7 +55,7 @@ export default function ScrollProgress() {
       <div className="relative w-[2px] h-32 bg-white/10 rounded-full overflow-hidden">
         <motion.div
           style={{ scaleY, originY: 0 }}
-          className="w-full h-full bg-[#ff5500]"
+          className="w-full h-full bg-[#3ddc84]"
         />
       </div>
 
@@ -76,7 +77,7 @@ export default function ScrollProgress() {
               <span
                 className={`block rounded-full transition-all duration-200 ${
                   isActive
-                    ? "w-2.5 h-2.5 bg-[#ff5500]"
+                    ? "w-2.5 h-2.5 bg-[#3ddc84]"
                     : "w-1.5 h-1.5 bg-white/20 group-hover:bg-white/50"
                 }`}
               />

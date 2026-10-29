@@ -4,23 +4,32 @@
   :root {
     --background: #09090b;
     --foreground: #fafafa;
-    --card: #121216;
-    --card-hover: #18181f;
+    --card: #111115;
+    --card-hover: #16161c;
     --border: rgba(255, 255, 255, 0.08);
     --border-hover: rgba(255, 255, 255, 0.16);
     --muted: #a1a1aa;
-    --accent: #ff5500; /* Signal Orange */
-    --accent-dim: rgba(255, 85, 0, 0.12);
+    --muted-dim: #71717a;
+    --accent: #3ddc84; /* Growth Green */
+    --accent-dim: rgba(61, 220, 132, 0.12);
+    --accent-hover: #34c776;
+
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-serif: "Instrument Serif", Georgia, Cambria, "Times New Roman", Times, serif;
   }
 
   html.theme-light {
-    --background: #f4f3ef;
+    --background: #f8f9fa;
     --foreground: #09090b;
     --card: #ffffff;
-    --card-hover: #eae8e1;
-    --border: rgba(0, 0, 0, 0.12);
-    --border-hover: rgba(0, 0, 0, 0.25);
+    --card-hover: #f1f3f5;
+    --border: rgba(0, 0, 0, 0.08);
+    --border-hover: rgba(0, 0, 0, 0.18);
     --muted: #52525b;
+    --muted-dim: #71717a;
+    --accent: #16a34a;
+    --accent-dim: rgba(22, 163, 74, 0.12);
+    --accent-hover: #15803d;
   }
 
   ::view-transition-old(root),
@@ -47,17 +56,29 @@
     color: var(--foreground);
     overflow-x: hidden;
     min-height: 100vh;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     cursor: default;
   }
 
-  ::selection {
-    background-color: var(--accent);
-    color: #ffffff;
+  button, a, input, select, textarea {
+    cursor: pointer;
   }
 
-  /* Lenis smooth scrolling rules - subtle & natural */
+  input, textarea {
+    cursor: text;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: #09090b;
+  }
+
+  /* Lenis smooth scrolling rules */
   html.lenis, html.lenis body {
     height: auto;
   }
@@ -100,7 +121,7 @@
   outline-offset: 2px;
 }
 
-/* Clean solid surface utilities */
+/* Flat surface utilities */
 .surface-card {
   background-color: var(--card);
   border: 1px solid var(--border);
@@ -108,6 +129,47 @@
 
 .surface-card:hover {
   border-color: var(--border-hover);
+}
+
+/* Serif accent word utility */
+.font-serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Shimmer animation utility for ShinyText */
+@keyframes shine {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shine {
+  background: linear-gradient(
+    110deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 1) 40%,
+    rgba(61, 220, 132, 1) 50%,
+    rgba(255, 255, 255, 1) 60%,
+    rgba(255, 255, 255, 0.4) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 4s infinite linear;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 /* Respect reduced motion */

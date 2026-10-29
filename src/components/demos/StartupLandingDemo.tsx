@@ -2,45 +2,49 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Terminal, Sparkles, ArrowRight, Check, Copy, Play } from "lucide-react";
+import { Check, Copy } from "lucide-react";
+
+const commands = {
+  deploy: "$ apex deploy --env=production --region=global",
+  scale: "$ apex cluster scale --nodes=64 --autoscale=true",
+  benchmark: "$ apex benchmark run --concurrency=10000",
+};
+
+const outputs = {
+  deploy: "✓ Built edge bundle in 420ms\n✓ Deployed to 38 edge locations\n✓ TLS certificate auto-provisioned\n🚀 Live at https://apex-cluster.edge.live",
+  scale: "✓ Cluster scaled: 64 distributed nodes\n✓ CPU utilization rebalanced to 24%\n✓ Zero dropped connections during migration",
+  benchmark: "✓ 10,000 concurrent requests simulated\n✓ P99 latency: 12.4ms | P95 latency: 8.1ms\n✓ 0% error rate under load",
+};
 
 export default function StartupLandingDemo() {
   const [copied, setCopied] = useState(false);
   const [activeCLI, setActiveCLI] = useState<"deploy" | "scale" | "benchmark">("deploy");
   const [displayedCommand, setDisplayedCommand] = useState("");
-  const [isTyping, setIsTyping] = useState(true);
   const [showOutput, setShowOutput] = useState(false);
-
-  const commands = {
-    deploy: "$ apex deploy --env=production --region=global",
-    scale: "$ apex cluster scale --nodes=64 --autoscale=true",
-    benchmark: "$ apex benchmark run --concurrency=10000",
-  };
-
-  const outputs = {
-    deploy: "✓ Built edge bundle in 420ms\n✓ Deployed to 38 edge locations\n✓ TLS certificate auto-provisioned\n🚀 Live at https://apex-cluster.edge.live",
-    scale: "✓ Cluster scaled: 64 distributed nodes\n✓ CPU utilization rebalanced to 24%\n✓ Zero dropped connections during migration",
-    benchmark: "✓ 10,000 concurrent requests simulated\n✓ P99 latency: 12.4ms | P95 latency: 8.1ms\n✓ 0% error rate under load",
-  };
 
   useEffect(() => {
     const fullCmd = commands[activeCLI];
-    setDisplayedCommand("");
-    setIsTyping(true);
-    setShowOutput(false);
+    let interval: NodeJS.Timeout;
 
-    let charIndex = 0;
-    const interval = setInterval(() => {
-      charIndex++;
-      setDisplayedCommand(fullCmd.slice(0, charIndex));
-      if (charIndex >= fullCmd.length) {
-        clearInterval(interval);
-        setIsTyping(false);
-        setTimeout(() => setShowOutput(true), 150);
-      }
-    }, 22);
+    const timer = setTimeout(() => {
+      setDisplayedCommand("");
+      setShowOutput(false);
 
-    return () => clearInterval(interval);
+      let charIndex = 0;
+      interval = setInterval(() => {
+        charIndex++;
+        setDisplayedCommand(fullCmd.slice(0, charIndex));
+        if (charIndex >= fullCmd.length) {
+          clearInterval(interval);
+          setTimeout(() => setShowOutput(true), 150);
+        }
+      }, 22);
+    }, 0);
+
+    return () => {
+      clearTimeout(timer);
+      if (interval) clearInterval(interval);
+    };
   }, [activeCLI]);
 
   const handleCopy = () => {
@@ -50,107 +54,68 @@ export default function StartupLandingDemo() {
   };
 
   return (
-    <div className="w-full rounded-xl overflow-hidden border border-white/10 bg-[#09090D] shadow-2xl font-sans text-xs">
-      {/* Top Bar */}
-      <div className="flex items-center justify-between border-b border-white/5 bg-[#121217] px-4 py-3">
+    <div className="w-full rounded-xl overflow-hidden border border-white/10 bg-[#0E0E12] shadow-2xl font-mono text-xs">
+      {/* Terminal Bar */}
+      <div className="flex items-center justify-between border-b border-white/10 bg-[#16161C] px-4 py-3">
         <div className="flex items-center gap-2">
-          <span className="font-mono text-xs font-bold text-white tracking-widest">
-            APEX // CLOUD EDGE
-          </span>
-          <span className="rounded bg-[#38BDF8]/15 text-[#38BDF8] px-2 py-0.5 text-[10px] font-mono">
-            NEXT-GEN RUNTIME
-          </span>
+          <div className="flex gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+            <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+          </div>
+          <span className="text-[11px] text-white/50 pl-2">apex-cli v2.4.1 (x86_64-apple-darwin)</span>
         </div>
-        <div className="flex items-center gap-2 font-mono text-[10px] text-white/50">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] animate-pulse" />
-          <span>EDGE NODES SYNCHRONIZED</span>
+
+        <div className="flex items-center gap-1">
+          <button
+            onClick={handleCopy}
+            className="flex items-center gap-1.5 rounded bg-white/5 hover:bg-white/10 px-2 py-1 text-[11px] text-white/70 hover:text-white transition-colors"
+          >
+            {copied ? <Check className="w-3 h-3 text-[#3ddc84]" /> : <Copy className="w-3 h-3" />}
+            <span>{copied ? "Copied" : "Copy"}</span>
+          </button>
         </div>
       </div>
 
-      {/* Hero Showcase inside Demo */}
-      <div className="p-5 sm:p-8 space-y-6">
-        <div className="max-w-xl space-y-3">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#38BDF8]/30 bg-[#38BDF8]/10 px-3 py-1 text-[11px] font-mono text-[#38BDF8]">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Apex Engine 3.0 Released</span>
-          </div>
-
-          <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
-            Deploy compute to the edge with zero cold starts.
-          </h3>
-
-          <p className="text-white/50 text-[11px] sm:text-xs leading-relaxed">
-            Distribute TypeScript workers worldwide in 400 milliseconds. Built for teams who refuse to let network latency slow their users down.
-          </p>
-        </div>
-
-        {/* Interactive CLI Console */}
-        <div className="rounded-xl bg-[#050507] border border-white/10 overflow-hidden shadow-inner">
-          {/* CLI Tab switcher */}
-          <div className="flex items-center justify-between border-b border-white/5 bg-[#0F0F14] px-3 py-2">
-            <div className="flex gap-1.5">
-              {(["deploy", "scale", "benchmark"] as const).map((cmd) => (
-                <button
-                  key={cmd}
-                  onClick={() => setActiveCLI(cmd)}
-                  className={`px-2.5 py-1 rounded font-mono text-[10px] uppercase transition-colors ${
-                    activeCLI === cmd
-                      ? "bg-[#38BDF8] text-black font-bold"
-                      : "text-white/50 hover:text-white"
-                  }`}
-                >
-                  {cmd}
-                </button>
-              ))}
-            </div>
-
+      {/* Terminal View */}
+      <div className="p-5 sm:p-7 space-y-6">
+        {/* Command Runner Selector Tabs */}
+        <div className="flex flex-wrap items-center gap-2">
+          {(["deploy", "scale", "benchmark"] as const).map((key) => (
             <button
-              onClick={handleCopy}
-              className="flex items-center gap-1 text-[10px] font-mono text-white/50 hover:text-white transition-colors"
+              key={key}
+              onClick={() => setActiveCLI(key)}
+              className={`rounded-lg px-3 py-1.5 text-xs transition-all uppercase font-mono ${
+                activeCLI === key
+                  ? "bg-[#3ddc84] text-black font-bold shadow-md"
+                  : "bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10"
+              }`}
             >
-              {copied ? <Check className="w-3 h-3 text-[#38BDF8]" /> : <Copy className="w-3 h-3" />}
-              <span>{copied ? "Copied" : "Copy"}</span>
+              run {key}
             </button>
-          </div>
-
-          {/* Terminal Body */}
-          <div className="p-4 font-mono text-[11px] space-y-3 min-h-[140px]">
-            <div className="flex items-center gap-2 text-[#38BDF8]">
-              <Terminal className="w-3.5 h-3.5 flex-shrink-0" />
-              <span>
-                {displayedCommand}
-                <motion.span
-                  animate={{ opacity: [1, 0, 1] }}
-                  transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-                  className="inline-block w-1.5 h-3.5 bg-[#38BDF8] ml-1 translate-y-[2px]"
-                />
-              </span>
-            </div>
-
-            <AnimatePresence mode="wait">
-              {showOutput && (
-                <motion.div
-                  key={activeCLI}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.25 }}
-                  className="text-white/70 whitespace-pre-line leading-relaxed pl-5 border-l border-[#38BDF8]/30 font-mono"
-                >
-                  {outputs[activeCLI]}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+          ))}
         </div>
 
-        {/* Action Row */}
-        <div className="flex flex-wrap items-center gap-3 pt-1">
-          <button className="flex items-center gap-2 rounded-lg bg-[#38BDF8] px-4 py-2.5 font-bold text-black text-[11px] uppercase tracking-wider hover:bg-[#0284c7] transition-all">
-            <span>Deploy First Worker</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
-          <span className="text-[10px] font-mono text-white/40">Free tier: 1M edge invocations/month</span>
+        {/* Console Box */}
+        <div className="rounded-lg bg-black/60 border border-white/5 p-4 sm:p-5 min-h-[140px] space-y-3 font-mono">
+          <div className="text-white flex items-center gap-2">
+            <span className="text-[#3ddc84]">&gt;</span>
+            <span>{displayedCommand}</span>
+            <span className="inline-block w-2 h-4 bg-[#3ddc84] animate-pulse" />
+          </div>
+
+          <AnimatePresence>
+            {showOutput && (
+              <motion.pre
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="text-zinc-400 whitespace-pre-wrap leading-relaxed text-[11px] border-t border-white/5 pt-3"
+              >
+                {outputs[activeCLI]}
+              </motion.pre>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </div>

@@ -1,60 +1,87 @@
-# KINETIC — Loud Editorial Web & Product Development Agency
+# GrowHaus — Websites & Products That Help Your Business Grow
 
-> **We design and engineer modern web applications, digital flagships, and business automation.**  
-> An Awwwards-level, work-first agency portfolio website built with **Next.js 16 (App Router)**, **TypeScript**, **Tailwind CSS**, **Framer Motion**, **GSAP ScrollTrigger**, and **Lenis**.
-
----
-
-## 🧭 Art Direction: "Loud Editorial"
-
-- **Oversized Typography**: Display headings up to 8vw with tight tracking, characterful uppercase display type, and monospace labels.
-- **High-Contrast Neo-Editorial Aesthetic**: Deep ink background (`#09090b`) with vivid International Signal Orange (`#ff5500`) and Cyber Volt lime (`#ccff00`) accents, hard 2px borders, and offset brutalist drop-shadows (`shadow-[4px_4px_0px_#000]`).
-- **Signature Creative Motion Layer**:
-  - **Custom Cursor System**: Desktop-only dot and spring-lagging ring with context labels (`"View"`, `"Drag"`, `"Start"`, `"Open"`, `"Connect"`).
-  - **Hero with Draggable Stickers**: Inertia physics sticker badges bounded to the hero container, plus a live local-time IST clock and green availability indicator.
-  - **Full-Screen Wipe Directory**: Circular clip-path wipe revealing giant staggered navigation links with a text-roll hover effect.
-  - **Showcase Centerpiece**: Giant typography project list with a cursor-following floating preview card (Option A), toggleable to an editorial 2x2 grid (Option B), with layout animated filtering.
-  - **Build Your Scope & Quote Configurator**: Interactive calculator allowing prospective clients to estimate ballpark budget and timeline, attaching choices directly to the project brief.
-  - **Interactive Tech Stack Wall**: Direct link between production technologies and client service pipelines.
-  - **Confetti Easter Egg**: Clicking the footer wordmark 5 times triggers a 60fps canvas confetti burst in brand colors.
-- **Strict Non-Negotiables Observed**:
-  - **NO animated/moving backgrounds**: zero particles, floating blobs, grain overlays, canvas backdrops, or looping background videos.
-  - **All concept projects labeled honestly** with design targets and prototype behaviors.
-  - **Full compliance with `prefers-reduced-motion`** and touch device adaptations.
+> **We build websites and products that help your business grow.**  
+> A creative developer flagship agency website built for **GrowHaus** with **Next.js 16 (App Router)**, **TypeScript**, **Tailwind CSS**, **React Three Fiber / Three.js**, **Framer Motion**, and **Lenis**.
 
 ---
 
-## 👥 The Founding Partners
+## 🌿 Agency Overview
 
-- **Adil Mirza** — Co-Founder & Creative Director *(Brand Identity, Interaction Motion & Swiss Grid Design)*
-- **Vedant Satbhai** — Co-Founder & Lead Systems Architect *(Next.js App Router, Distributed Backends & DB Engines)*
-- **Prajjwal Tripathi** — Co-Founder & Automation Engineer *(Autonomous LLM Agents, Workflow Orchestration & Pipelines)*
+- **Name**: GrowHaus
+- **Tagline**: *"We build websites and products that help your business grow."*
+- **Target Audience**: Founders, startups, and small businesses.
+- **Core Services**:
+  1. **Custom Websites**: Fast, high-converting marketing sites that tell your story and drive sales.
+  2. **Web Applications & SaaS**: Scalable web apps with clean code, authentication, databases, and billing.
+  3. **Product Development**: From napkin sketch to working MVP ready for paying customers.
+  4. **Business Automation & AI**: Connect your tools, eliminate manual tasks, and deploy smart AI workflows.
+  5. **UI/UX Design**: Clean, user-centered interfaces designed for clarity and conversion.
+- **Team**:
+  - **Buzdil Mirza** — Head of Design *(Product design, design systems, and user interfaces)*
+  - **Vedant Satbhai** — Lead Engineer *(Full-stack architecture, Next.js, and cloud systems)*
+  - **Prajjwal Tripathi** — Automation Lead *(AI workflows, business automation, and system integration)*
+- **Contact**: `hello@growhaus.agency` | [LinkedIn](https://linkedin.com)
+- **Client Promise**: *"We reply within 24 hours."* (Free 30-min discovery call; booking link reveals once configured).
 
 ---
 
-## 🛠️ Showcase Concept Projects
+## 🎨 Visual Direction & Art Direction
 
-All 5 projects are configured in `src/config/site.ts` with honest framing (`isConcept: true`):
+- **One Persistent Three.js Canvas**: A single full-screen React Three Fiber canvas fixed behind page content (`pointer-events: none`). Camera and objects are driven seamlessly across sections by scroll progress (Hero house assembly → floating screens → curved gallery → service orbit → process waypoints → CTA particle convergence).
+- **Hero High-Contrast Backdrop**: Soft radial green glow behind the hero 3D house, emissive green window panels, metallic glass blocks, and reflective floor grid so the house is luminous and clear.
+- **Multi-Section Dynamic Shaders**: Low-contrast procedural canvas background layers that morph from Aurora in the hero, Threads in services, Waves in process, to Silk in the final CTA.
+- **Clean Typography**: Clean sans-serif family paired with an optional serif accent (`Instrument Serif` italic) applied strictly to one highlighted keyword per heading.
+  - Scale: Body 16px (line-height 1.6), labels 12–13px, section headings `clamp(28px, 4vw, 48px)`, hero heading max 56px on desktop. Max text width 60–70 characters.
+- **Surface Palette**: Near-black dark surfaces (`#09090b` / `#111115` / `#16161c`) accented by vibrant growth green (`#3DDC84`). High contrast WCAG AA compliant.
+- **Brand Mark**: Custom GrowHaus logo mark pairing an architectural house silhouette with an upward growth sprout/arrow.
+- **Strict Cursor Rules**: Normal native system cursor everywhere. Zero custom cursors, zero trails, zero pointer-following elements, and zero magnetic button shifts. All motion is driven by time, scroll, or click/tap/keyboard.
 
-1. **Pulse Real-Time Telemetry** *(Web App / SaaS & Cloud)* — High-density cloud infrastructure telemetry dashboard with interactive time switches and sub-18ms chart render target.
-2. **Aura Minimalist Objects** *(Website / E-Commerce)* — Tactile acoustic hardware flagship with interactive finish switcher and springy slide-over bag drawer.
-3. **Synapse Flow Automation** *(Automation / AI & Workflow)* — Autonomous lead qualification and CRM enrichment pipeline with interactive node runner and animated connector lines.
-4. **Vault Private Wealth App** *(Web App / Fintech)* — Mobile-first portfolio management with 1-tap card freeze security and categorized spend history.
-5. **Apex Cloud Foundation** *(Website / Developer Tools)* — Technical edge compute landing page with interactive CLI command runner with typing effects.
+---
+
+## 🚀 Key Features & Showcases
+
+### 1. "What We Can Build" (8 Live Micro Demos in Bento Grid)
+Interactive mini-demos with looping animations demonstrating core client techniques:
+1. **Business Landing Page** — Real-time typing headline, pulsing emerald CTA button, and mini page scroll.
+2. **SaaS Dashboard** — Animated undulating bar charts and ticking live MRR metric counter.
+3. **Online Store** — 3D turntable isometric product rotation with periodic "Added to Cart" toast banner.
+4. **Portfolio Site** — Sequential staggered masonry tile reveal.
+5. **Booking Site** — Interactive calendar day selection, time slot highlight, and "Confirmed ✓" checkmark.
+6. **Restaurant Site** — Sliding menu item cards with live prices and table reservation toggle.
+7. **AI Tool or Chatbot** — Simulated LLM chat prompt with streaming text response and blinking cursor.
+8. **Workflow Automation** — Visual 3-node pipeline (Form → AI CRM → Slack) with glowing packet particle traveling along SVG connector.
+
+*Clicking any card opens a modal detailing: what it is, target audience, typical features, timeline (e.g., 2–4 weeks), and a "Get a quote like this" action that pre-fills the contact form.*
+
+### 2. 3D Curved Work Showcase (Real Concept Previews)
+- Arranges the 5 concept projects along a curved 3D cylindrical stage.
+- **Auto-rotates continuously and slowly**, pausing on interaction (drag, focus, keyboard arrows) and resuming after 3 seconds.
+- Displays **real captured screenshots** from `/public/projects/` (captured with Playwright from the actual case study prototypes: Pulse, Aura, Synapse Flow, Vault, and Apex).
+- Asymmetric notched card corners, unique project accent color, oversized numbers, and slide-up case study link.
+
+### 3. Concept Case Studies & Interactive Prototyping
+Each project features a dedicated case study page with full engineering details and a working interactive prototype:
+- **Pulse** — Cloud Telemetry Dashboard (time-range filter, sub-18ms chart target).
+- **Aura** — Minimalist Objects Flagship (live finish switcher and slide-over bag drawer).
+- **Synapse Flow** — AI Workflow Automation (interactive node runner and animated flow state).
+- **Vault** — Private Wealth Mobile App (1-tap card lock and instant spend categorization).
+- **Apex** — Cloud Foundation (interactive CLI command runner with real-time outputs).
 
 ---
 
 ## ⚡ Tech Stack
 
-- **Framework**: Next.js 16 (App Router with Turbopack)
+- **Framework**: [Next.js 16](https://nextjs.org) (App Router)
 - **Language**: TypeScript 5 (Strict Mode)
-- **Styling**: Tailwind CSS & Vanilla CSS
-- **Motion & Physics**: Framer Motion, GSAP ScrollTrigger, Lenis Smooth Scroll
-- **Icons**: Lucide React & Custom SVG brand icons
+- **Styling**: Tailwind CSS v4 & PostCSS
+- **3D Graphics**: Three.js, React Three Fiber, React Three Drei
+- **Motion**: Framer Motion, Lenis Smooth Scroll
+- **Automation / Testing**: Playwright (for real screenshot captures)
+- **Icons**: Lucide React & Custom SVG brand marks
 
 ---
 
-## 🚀 Quickstart
+## 🛠️ Quickstart
 
 ### 1. Install Dependencies
 ```bash
@@ -65,25 +92,20 @@ npm install
 ```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) to view the site in your browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### 3. Production Build & Validation
+### 3. Production Build & Linting
 ```bash
+npm run lint
 npm run build
 ```
 
 ---
 
-## ⚙️ Content Customization
+## ⚙️ Content & Configuration
 
-All copy, projects, founders, links, and pricing are centralized in a single typed configuration file:
+All copy, services, projects, samples, pricing tiers, and founder profiles are strictly centralized in a single typed configuration file:
 
 👉 **`src/config/site.ts`**
 
-Edit `src/config/site.ts` to update:
-- Agency name, tagline, and contact emails
-- Founder bios, LinkedIn profiles, and avatars
-- Service deliverables and pricing tiers
-- Portfolio projects and case studies
-
-Detailed documentation of all animation components is available in **[`ANIMATIONS.md`](./ANIMATIONS.md)**.
+For a detailed index of all creative motion components and instructions on disabling them, see **[`ANIMATIONS.md`](./ANIMATIONS.md)**.

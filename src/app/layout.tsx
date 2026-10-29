@@ -1,26 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Syne } from "next/font/google";
 import "./globals.css";
 import { SITE_CONFIG } from "@/config/site";
-import CursorProvider from "@/components/animation/CursorProvider";
 import SmoothScroll from "@/components/animation/SmoothScroll";
 import Preloader from "@/components/animation/Preloader";
 import ScrollProgress from "@/components/animation/ScrollProgress";
 import PageTransition from "@/components/animation/PageTransition";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const syne = Syne({
-  variable: "--font-display",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const viewport: Viewport = {
   themeColor: "#09090b",
@@ -31,26 +17,27 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: `${SITE_CONFIG.name} — Web & Product Development Agency`,
+    default: `${SITE_CONFIG.name} — Web & Product Development`,
     template: `%s | ${SITE_CONFIG.name}`,
   },
   description: SITE_CONFIG.heroSubtext,
   keywords: [
+    "GrowHaus",
     "Web Development Agency",
     "Product Development",
     "Next.js Developers",
     "SaaS MVP",
-    "Workflow Automation",
-    "Linear Inspired Design",
-    "TypeScript",
+    "Business Automation",
+    "AI Workflows",
+    "UI UX Design",
   ],
-  authors: [{ name: SITE_CONFIG.name, url: "https://kinetic.studio" }],
+  authors: [{ name: SITE_CONFIG.name, url: "https://growhaus.agency" }],
   creator: SITE_CONFIG.name,
-  metadataBase: new URL("https://kinetic.studio"),
+  metadataBase: new URL("https://growhaus.agency"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://kinetic.studio",
+    url: "https://growhaus.agency",
     title: `${SITE_CONFIG.name} — ${SITE_CONFIG.tagline}`,
     description: SITE_CONFIG.heroSubtext,
     siteName: SITE_CONFIG.name,
@@ -59,7 +46,7 @@ export const metadata: Metadata = {
         url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&h=630&q=80",
         width: 1200,
         height: 630,
-        alt: `${SITE_CONFIG.name} Portfolio`,
+        alt: `${SITE_CONFIG.name} Web & Product Portfolio`,
       },
     ],
   },
@@ -85,7 +72,7 @@ export default function RootLayout({
     name: SITE_CONFIG.name,
     legalName: SITE_CONFIG.legalName,
     description: SITE_CONFIG.heroSubtext,
-    url: "https://kinetic.studio",
+    url: "https://growhaus.agency",
     email: SITE_CONFIG.contact.email,
     founders: SITE_CONFIG.founders.map((f) => ({
       "@type": "Person",
@@ -96,31 +83,38 @@ export default function RootLayout({
     serviceType: [
       "Custom Websites",
       "Web App & SaaS Development",
-      "Client Product Development",
-      "Business Automation",
+      "Product Development",
+      "Business Automation & AI",
+      "UI/UX Design",
     ],
+    priceRange: "$$",
   };
 
   return (
-    <html lang="en" className={`${plusJakarta.variable} ${syne.variable} dark`}>
+    <html lang="en" className="dark">
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="font-sans bg-[#09090b] text-[#fafafa] selection:bg-[#ff5500] selection:text-white antialiased">
-        <CursorProvider>
-          <SmoothScroll>
-            <Preloader />
-            <ScrollProgress />
+      <body className="bg-[#09090b] text-[#fafafa] antialiased selection:bg-[#3ddc84] selection:text-[#09090b]">
+        {/* Subtle Scroll Progress Indicator */}
+        <ScrollProgress />
+
+        {/* Short, skippable preloader (max 1.2s, first visit only) */}
+        <Preloader />
+
+        {/* Lenis Smooth Scrolling Engine */}
+        <SmoothScroll>
+          <div className="flex min-h-screen flex-col">
             <Navbar />
             <PageTransition>
-              {children}
+              <div className="flex-1">{children}</div>
             </PageTransition>
             <Footer />
-          </SmoothScroll>
-        </CursorProvider>
+          </div>
+        </SmoothScroll>
       </body>
     </html>
   );

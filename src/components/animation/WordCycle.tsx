@@ -13,18 +13,16 @@ interface WordCycleProps {
 export default function WordCycle({
   words,
   interval = 2800,
-  className = "text-[#ff5500]",
+  className = "text-[#3ddc84]",
 }: WordCycleProps) {
   const [index, setIndex] = useState(0);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     if (reducedMotion || words.length <= 1) return;
-
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % words.length);
     }, interval);
-
     return () => clearInterval(timer);
   }, [words.length, interval, reducedMotion]);
 
@@ -33,18 +31,15 @@ export default function WordCycle({
   }
 
   return (
-    <span className="inline-block relative overflow-hidden align-top text-left h-[1.18em]">
+    <span className={`inline-block overflow-hidden relative align-baseline ${className}`}>
       <AnimatePresence mode="wait">
         <motion.span
           key={words[index]}
-          initial={{ y: "105%", opacity: 0 }}
+          initial={{ y: "100%", opacity: 0 }}
           animate={{ y: "0%", opacity: 1 }}
-          exit={{ y: "-105%", opacity: 0 }}
-          transition={{
-            duration: 0.55,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-          className={`block ${className}`}
+          exit={{ y: "-100%", opacity: 0 }}
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="inline-block"
         >
           {words[index]}
         </motion.span>
