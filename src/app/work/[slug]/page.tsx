@@ -6,6 +6,8 @@ import { SITE_CONFIG } from "@/config/site";
 import Reveal from "@/components/animation/Reveal";
 import DemoRenderer from "@/components/demos/DemoRenderer";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return SITE_CONFIG.projects.map((project) => ({
     slug: project.slug,

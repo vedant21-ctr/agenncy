@@ -71,7 +71,7 @@ Each project features a dedicated case study page with full engineering details 
 
 ## ⚡ Tech Stack
 
-- **Framework**: [Next.js 16](https://nextjs.org) (App Router)
+- **Framework**: [Next.js 16](https://nextjs.org) (App Router, Static Export)
 - **Language**: TypeScript 5 (Strict Mode)
 - **Styling**: Tailwind CSS v4 & PostCSS
 - **3D Graphics**: Three.js, React Three Fiber, React Three Drei
@@ -94,17 +94,63 @@ npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### 3. Production Build & Linting
+### 3. Production Build & Static Export
 ```bash
-npm run lint
 npm run build
 ```
+This builds the site and exports static HTML, CSS, JavaScript, and assets into the `out/` directory.
+
+---
+
+## 🚀 Deploy on Render
+
+This project is configured as a high-performance **Static Site** on [Render](https://render.com).
+
+### Render Dashboard Settings
+
+When creating a new **Static Site** on Render:
+
+1. **Connect Repository**: Link `https://github.com/vedant21-ctr/agenncy.git`.
+2. **Build Command**:
+   ```bash
+   npm install && npm run build
+   ```
+3. **Publish Directory**:
+   ```text
+   out
+   ```
+4. **Environment Variables**:
+   Add the following in the Render Dashboard under **Environment**:
+   - `NODE_VERSION`: `20`
+   - `NEXT_PUBLIC_SITE_URL`: `https://growhaus.onrender.com` (or your custom domain)
+   - `NEXT_PUBLIC_FORM_ENDPOINT`: Your contact form endpoint (e.g. `https://formspree.io/f/<your-form-id>`)
+
+### Deploying via Infrastructure as Code (`render.yaml`)
+
+A [`render.yaml`](./render.yaml) file is included at the repository root. When deploying via Render Blueprint:
+1. Navigate to **Blueprints** in Render.
+2. Connect this repository. Render automatically reads `render.yaml` and provisions the static site service.
+
+### Adding a Custom Domain
+
+1. In the Render Dashboard, go to your static site's **Settings** tab.
+2. Under **Custom Domains**, click **Add Custom Domain** and enter your domain (e.g., `growhaus.agency` and `www.growhaus.agency`).
+3. Follow the DNS instructions provided by Render:
+   - For root domain: Add an `ANAME` or `ALIAS` record pointing to Render's DNS target.
+   - For subdomain (`www`): Add a `CNAME` record pointing to your Render app host (e.g. `growhaus.onrender.com`).
+4. Render will automatically issue a free Let's Encrypt SSL certificate once DNS propagates.
+5. Update `NEXT_PUBLIC_SITE_URL` in your Render Environment Variables to match your custom domain (e.g., `https://growhaus.agency`).
+
+### How to Redeploy
+
+- **Automatic Deploys**: By default, any push to the `main` branch triggers an automatic rebuild and static deployment on Render.
+- **Manual Redeploy**: In the Render Dashboard, click **Manual Deploy** → **Clear build cache & deploy** to initiate a clean build.
 
 ---
 
 ## ⚙️ Content & Configuration
 
-All copy, services, projects, samples, pricing tiers, and founder profiles are strictly centralized in a single typed configuration file:
+All copy, services, projects, samples, and founder profiles are strictly centralized in a single typed configuration file:
 
 👉 **`src/config/site.ts`**
 

@@ -15,6 +15,8 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://growhaus.onrender.com";
+
 export const metadata: Metadata = {
   title: {
     default: `${SITE_CONFIG.name} — Web & Product Development`,
@@ -31,13 +33,13 @@ export const metadata: Metadata = {
     "AI Workflows",
     "UI UX Design",
   ],
-  authors: [{ name: SITE_CONFIG.name, url: "https://growhaus.agency" }],
+  authors: [{ name: SITE_CONFIG.name, url: siteUrl }],
   creator: SITE_CONFIG.name,
-  metadataBase: new URL("https://growhaus.agency"),
+  metadataBase: new URL(siteUrl),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://growhaus.agency",
+    url: siteUrl,
     title: `${SITE_CONFIG.name} — ${SITE_CONFIG.tagline}`,
     description: SITE_CONFIG.heroSubtext,
     siteName: SITE_CONFIG.name,
@@ -72,7 +74,7 @@ export default function RootLayout({
     name: SITE_CONFIG.name,
     legalName: SITE_CONFIG.legalName,
     description: SITE_CONFIG.heroSubtext,
-    url: "https://growhaus.agency",
+    url: siteUrl,
     email: SITE_CONFIG.contact.email,
     founders: SITE_CONFIG.founders.map((f) => ({
       "@type": "Person",
